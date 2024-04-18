@@ -68,7 +68,7 @@ x_train, x_test, y_train, y_test = train_test_split(data, labels, test_size=0.2,
 
 classifier = SVC() #creating new instance of SVC and calling the instance classifier, look up SVC on sklearn
 
-parameters = [{'C': [1, 10, 100, 1000], 'gamma':[0.01, 0.001, 0.0001]}] # parameters is a list containing a dictionary with 2 keys gamma and C each key has values
+parameters = [{'C': [1, 10, 100, 1000], 'kernel': ['linear']},{'C': [1, 10, 100, 1000], 'kernel': ['rbf'], 'gamma':[0.01, 0.001, 0.0001]}] # parameters is a list containing a dictionary with 2 keys gamma and C each key has values
 # gamma and C are both parameters of an SVC object, in effect this will allow us to train not 1 image classifier but 12(gamma * C)
 
 grid_search = GridSearchCV(classifier, parameters) # grid search allows us to take an SVC instance (classifier) and a set of parameters (parameters) then run every possible combination of parameters in the object to find the best performing model, the amount of models evaluated is equal to (paramater * parameter * paramater.. until there are no svc parameters left)

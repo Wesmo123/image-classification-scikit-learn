@@ -19,12 +19,12 @@ for dirname, _, filenames in os.walk('input'):
 
 def load_data():
     train_dataset = h5py.File('train_catvnoncat.h5', "r")
-    train_set_x_orig = np.array(train_dataset["train_set_x"][:]) # your train set features
-    train_set_y_orig = np.array(train_dataset["train_set_y"][:]) # your train set labels
+    train_set_x_orig = np.array(train_dataset["train_set_x"][:]) # your train set features, features is the actual data of a dataset, represented by x
+    train_set_y_orig = np.array(train_dataset["train_set_y"][:]) # your train set labels, labels are the classes of the dataset, represented by y
 
     test_dataset = h5py.File('test_catvnoncat.h5', "r")
-    test_set_x_orig = np.array(test_dataset["test_set_x"][:]) # your test set features
-    test_set_y_orig = np.array(test_dataset["test_set_y"][:]) # your test set labels
+    test_set_x_orig = np.array(test_dataset["test_set_x"][:]) # your test set features, features is the actual data of a dataset, represented by x
+    test_set_y_orig = np.array(test_dataset["test_set_y"][:]) # your test set labels, labels are the classes of the dataset, represented by y
 
     classes = np.array(test_dataset["list_classes"][:]) # the list of classes
 
@@ -49,11 +49,11 @@ labels = []
 
 for element_id, element in enumerate(train_x_orig): # iterating through the train set features and adding the features into data array and its corresponding labebels from classes and train_y to the labels array
     data.append(element.flatten()) # make sure to flatten images as they are in a 2d array but they need to be in a 1d array for training, .flatten from numpy flattens images from 2d to 1d arrays
-    labels.append(classes[train_y[0,element_id]].decode("utf-8"))
+    labels.append(classes[train_y[0,element_id]].decode("utf-8")) #adding the labels for corresponding images to the labels array, remember to use .decode with h5 files
 
 for element_id, element in enumerate(test_x_orig):  #combining the test set with the train set for the sake of the example to split later, obviously dont do this normally there is no point to joining and resplitting the data
     data.append(element.flatten()) # make sure to flatten images as they are in a 2d array but they need to be in a 1d array for training, .flatten from numpy flattens images from 2d to 1d arrays
-    labels.append(classes[test_y[0,element_id]].decode("utf-8"))
+    labels.append(classes[test_y[0,element_id]].decode("utf-8")) #adding the labels for corresponding images to the labels array, remember to use .decode with h5 files
 
 
 
